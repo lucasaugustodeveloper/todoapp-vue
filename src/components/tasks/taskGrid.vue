@@ -12,7 +12,7 @@ defineProps({
 <template>
   <div class="task-grid">
     <template v-if="tasks.length">
-      <TaskItem v-for="task in tasks" :key="task.name" :task="task" />
+      <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
     </template>
 
     <p class="no-task" v-else>Your life is up to date :)</p>
