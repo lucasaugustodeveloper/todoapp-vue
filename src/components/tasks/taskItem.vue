@@ -17,8 +17,12 @@ const stateClass = computed(() => {
 </script>
 
 <template>
-  <div class="task" :class="stateClass">
-    <span class="close" @click="$emit('taskDelete', task)">x</span>
+  <div
+    class="task"
+    :class="stateClass"
+    @click="$emit('taskStateChange', task.id)"
+  >
+    <span class="close" @click.stop="$emit('taskDelete', task)">x</span>
     <p>{{ task.name }}</p>
   </div>
 </template>

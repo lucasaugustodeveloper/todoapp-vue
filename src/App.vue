@@ -34,6 +34,20 @@ const deleteTask = id => {
 
   tasks.value = newTasks
 }
+const toggleStateTask = id => {
+    const newTasks = tasks.value.map(task => {
+    if (task.id === id) {
+      return {
+      ...task,
+        pending: !task.pending
+      }
+    }
+
+    return task
+  })
+
+  tasks.value = newTasks
+}
 </script>
 
 <template>
@@ -47,7 +61,11 @@ const deleteTask = id => {
 
   <main>
 
-    <TaskGrid :tasks="tasks" @taskDelete="deleteTask" />
+    <TaskGrid
+      :tasks="tasks"
+      @taskDelete="deleteTask"
+      @taskStateChange="toggleStateTask"
+    />
   </main>
 </template>
 

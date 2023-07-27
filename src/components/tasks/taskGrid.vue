@@ -17,6 +17,7 @@ defineProps({
         :key="task.id"
         :task="task"
         @taskDelete="$emit('taskDelete', task.id)"
+        @taskStateChange="$emit('taskStateChange', task.id)"
       />
     </template>
 
