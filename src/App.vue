@@ -1,10 +1,11 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { uid } from 'uid/secure'
 
 import HelloWorld from './components/HelloWorld.vue'
 import TaskGrid from './components/tasks/taskGrid.vue';
 import TaskNew from './components/tasks/newTask.vue';
+import TaskProgress from './components/tasks/taskProgress.vue';
 
 const tasks = ref([
   {
@@ -48,6 +49,12 @@ const toggleStateTask = id => {
 
   tasks.value = newTasks
 }
+const progress = computed(() => {
+  const total = tasks.value.length
+  const done = tasks.value.filter(t => !t.pending).length
+
+  return Math.round(done / total * 100) || 0
+})
 </script>
 
 <template>
@@ -56,11 +63,12 @@ const toggleStateTask = id => {
       <HelloWorld text="TodoApp Vue" />
     </div>
 
+    <TaskProgress :progress="progress" />
+
     <TaskNew @taskAdd="addTask" />
   </header>
 
   <main>
-
     <TaskGrid
       :tasks="tasks"
       @taskDelete="deleteTask"
