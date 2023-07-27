@@ -18,6 +18,7 @@ const stateClass = computed(() => {
 
 <template>
   <div class="task" :class="stateClass">
+    <span class="close" @click="$emit('taskDelete', task)">x</span>
     <p>{{ task.name }}</p>
   </div>
 </template>
@@ -40,6 +41,7 @@ const stateClass = computed(() => {
 
   cursor: pointer;
   user-select: none;
+  position: relative;
 }
 
 .task p {
@@ -54,10 +56,41 @@ const stateClass = computed(() => {
 }
 
 .task.done {
-  text-decoration: line-through;
-
   border-color: #0a8f08;
   background-color: #4caf50;
   color: #dddddd;
+}
+
+.task.done p {
+  text-decoration: line-through;
+}
+
+.close {
+  font-size: 0.725rem;
+  font-weight: 700;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 4rem;
+  padding-top: 0.15rem;
+
+  position: absolute;
+  right: 0.625rem;
+  top: 0.625rem;
+  
+  cursor: pointer;
+  user-select: none;
+}
+
+.pending .close {
+  background-color: #b73229;
+}
+.done .close {
+  background-color: #0a8f08;
 }
 </style>

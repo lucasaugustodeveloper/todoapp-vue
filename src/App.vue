@@ -19,7 +19,7 @@ const tasks = ref([
   }
 ])
 
-const addTask = (task) => {
+const addTask = task => {
   const sameName = t => t.name === task.name
   const reallyNew = tasks.value.filter(sameName).length === 0
 
@@ -28,6 +28,11 @@ const addTask = (task) => {
     name: task.name,
     pending: true
   })
+}
+const deleteTask = id => {
+  const newTasks = tasks.value.filter(task => task.id !== id)
+
+  tasks.value = newTasks
 }
 </script>
 
@@ -42,7 +47,7 @@ const addTask = (task) => {
 
   <main>
 
-    <TaskGrid :tasks="tasks" />
+    <TaskGrid :tasks="tasks" @taskDelete="deleteTask" />
   </main>
 </template>
 
